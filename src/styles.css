@@ -1,0 +1,27 @@
+body, html {
+  font-family: 'Roboto', Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+}
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.control-container{
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+}
+
+controls {
+  background: white;
+}
+
+paper-input{
+  margin:5px;
+}
+
+.range-label{
+  margin:5px;
+}
