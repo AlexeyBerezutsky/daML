@@ -6,7 +6,7 @@ $(function () {
     });
 
     $(".search-radius").on('updateValues', function (customEvent) {
-        postData.searchRadius = +this.valueMax * 100;
+        postData.searchRadius = +this.valueMax;
 
         if (!!found) {
             found.circle.setRadius(postData.searchRadius);
@@ -63,7 +63,7 @@ var loadData = (function ($) {
         });
 
         if (!!found) {
-            $(".search-radius")[0].setValues(null, found.rad / 100);
+            $(".search-radius")[0].setValues(null, found.rad);
         }
     };
 
