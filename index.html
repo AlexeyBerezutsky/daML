@@ -18,7 +18,11 @@
     <link rel="import" href="bower_components/paper-input/paper-input.html">
     <link rel="import" href="bower_components/paper-button/paper-button.html">
     <link rel="import" href="bower_components/paper-range-slider/paper-range-slider.html">
+    <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
     <link rel="import" href="bower_components/iron-label/iron-label.html">
+    <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
+    <link rel="import" href="bower_components/simple-modal/simple-modal.html">
+
 
     <link rel="stylesheet" href="styles.css">
 
@@ -26,10 +30,14 @@
 </head>
 
 <body unresolved>
+<simple-modal class="modal-inprogress" no-exit>
+    <span>"Please, wait while we are doing our job..."</span>
+    <paper-spinner active>...</paper-spinner>
+</simple-modal>
+
 <div id="map"></div>
 
 <div class="control-container">
-
     <paper-card class="controls">
         <paper-input class="segment-min" label="segment Min" value="100"></paper-input>
 

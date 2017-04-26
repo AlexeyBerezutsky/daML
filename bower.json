@@ -11,6 +11,8 @@
     "google-map": "GoogleWebComponents/google-map#^1.2.0",
     "paper-range-slider": "IftachSadeh/paper-range-slider#^0.2.7",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "neon-animation": "^1.2.5",
+    "simple-modal": "simple-modal-element#^0.3.2"
   }
 }
