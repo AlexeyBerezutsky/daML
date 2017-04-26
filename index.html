@@ -2,73 +2,73 @@
 
 <html>
 <head>
-  <title>daML</title>
+    <title>daML</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
 
-  
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <link rel="import" href="bower_components/google-map/google-map.html">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
-  <link rel="import" href="bower_components/paper-card/paper-card.html">
-  <link rel="import" href="bower_components/paper-input/paper-input.html">
-  <link rel="import" href="bower_components/paper-button/paper-button.html">
-  <link rel="import" href="bower_components/paper-range-slider/paper-range-slider.html">
-  <link rel="import" href="bower_components/iron-label/iron-label.html">
 
-  <link rel="stylesheet" href="styles.css">
+    <link rel="import" href="bower_components/paper-card/paper-card.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-range-slider/paper-range-slider.html">
+    <link rel="import" href="bower_components/iron-label/iron-label.html">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="main.js"></script>
 </head>
 
 <body unresolved>
-  <google-map latitude="59.957570" longitude="30.307946" api-key="AIzaSyDErjYoQNihr97um9KzCqB2nLqiabLSt8s" zoom="13" disable-default-ui>
-    <div class="marker-container">
-      <google-map-marker latitude="59.957570" longitude="30.307946" title="Go Giants!" draggable="true"></google-map-marker>  
-    </div>
-  </google-map>
+<div id="map"></div>
 
-  <div class="control-container">
+<div class="control-container">
 
-  <paper-card class = "controls">
-      <paper-input label="segment Min" value = "100"></paper-input>
-      <paper-input label="segment Max" value = "1000"></paper-input>
-      
-      <paper-input label="Segment Amount" value = "3"></paper-input>
-      
-      
-       <iron-label>
-         <span class="range-label">Search radius</span>
-         
-         <paper-range-slider iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
-      </iron-label>
-      
-      <iron-label>
-         <span class="range-label">Culture</span>
-         
-         <paper-range-slider iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
-      </iron-label>
-      
-      <iron-label>
-         <span class="range-label">Food</span>
-         
-         <paper-range-slider iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
-      </iron-label>
-      
-      
-      <iron-label>
-         <span class="range-label">Night Life</span>
-         
-         <paper-range-slider iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
-      </iron-label>
-      
-      <paper-button>Update</paper-button>
-  </paper-card>
-  
-  </div>
+    <paper-card class="controls">
+        <paper-input class="segment-min" label="segment Min" value="100"></paper-input>
+
+        <paper-input class="segment-max" label="segment Max" value="1000"></paper-input>
+
+        <paper-input class="segment-amount" label="Segment Amount" value="3"></paper-input>
+
+        <iron-label>
+            <span class="range-label">Search radius</span>
+
+            <paper-range-slider class="search-radius" iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
+        </iron-label>
+
+        <iron-label>
+            <span class="range-label">Culture</span>
+
+            <paper-range-slider class="culture-rate" iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
+        </iron-label>
+
+        <iron-label>
+            <span class="range-label">Food</span>
+
+            <paper-range-slider class="food-rate" iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
+        </iron-label>
+
+
+        <iron-label>
+            <span class="range-label">Night Life</span>
+
+            <paper-range-slider class="night-life-rate" iron-label-target single-slider step="1" min="0" max="100"></paper-range-slider>
+        </iron-label>
+
+        <paper-button onclick="loadData();">Update</paper-button>
+    </paper-card>
+</div>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDErjYoQNihr97um9KzCqB2nLqiabLSt8s&callback=initMap">
+</script>
 </body>
 
 </html>
