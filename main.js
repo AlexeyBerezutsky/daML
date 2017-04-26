@@ -157,6 +157,16 @@ var mapController = (function ($) {
             });
         });
 
+        var ratings = _.map(markers,'rating');
+
+        var scale = (_.max(ratings)) || 1;
+
+        _.forEach(markers, function(marker){
+           if(marker.rating){
+               marker.rating = (marker.rating)/scale;
+           }
+        });
+
         return markers;
     };
 
@@ -181,7 +191,7 @@ var mapController = (function ($) {
             var pin = new google.maps.Marker({
                 position: marker.latLng,
                 map: map,
-                icon: getIcon(marker.markerType),
+                icon: getIcon(marker.markerType, marker.rating),
                 title: marker.name || ''
             });
 
@@ -193,10 +203,10 @@ var mapController = (function ($) {
         _.forEach(areas, function (area) {
             var circle = new google.maps.Circle({
                 strokeColor: getColor(area.areaType),
-                strokeOpacity: 0.8,
+                strokeOpacity: 1,
                 strokeWeight: 2,
                 fillColor: getColor(area.areaType),
-                fillOpacity: 0.35,
+                fillOpacity: 0.1,
                 map: map,
                 center: area.latLng,
                 radius: area.rad
@@ -206,15 +216,24 @@ var mapController = (function ($) {
         });
     };
 
-    var getIcon = function (markerType) {
+    var getIcon = function (markerType, rating) {
         switch (markerType) {
             case 'whereEmI':
                 return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2F40FF';
 
             case 'segment':
-                return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FF0000';
+                return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FF2CE5';
 
             default:
+
+                if(rating < 0.3){
+                    return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FF0714';
+                }
+
+                if(rating > 0.6){
+                    return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|21FF29';
+                }
+
                 return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FBFF3D';
         }
     };
@@ -222,7 +241,7 @@ var mapController = (function ($) {
     var getColor = function (areaType) {
         switch (areaType) {
             case 'searchArea':
-                return '#9EFFB9';
+                return '#000000';
 
             default:
                 return '#FF0000';
