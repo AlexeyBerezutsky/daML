@@ -1,28 +1,63 @@
 var map, markerContainer = [], areaContainer = [], postData = {};
 
-$(function () {
-    var found = _.find(areaContainer, function (area) {
-        return area.areaType === 'searchArea';
-    });
 
-    $(".search-radius").on('updateValues', function (customEvent) {
-        postData.searchRadius = +this.valueMax;
+var mapController = (function ($) {
+    var initAndBound = function () {
+        postData = {
+            searchRadius: 2000,
 
-        if (!!found) {
-            found.circle.setRadius(postData.searchRadius);
-        }
-    });
+            cultureRate: 100,
 
-    $(".food-rate").on('updateValues', function (customEvent) {
-        postData.foodRate = +this.valueMax;
-    });
+            foodRate: 100,
 
-    $(".night-life-rate").on('updateValues', function (customEvent) {
-        postData.nightLifeRate = +this.valueMax;
-    });
-});
+            nightLifeRate: 100,
 
-var loadData = (function ($) {
+            segmentAmount: 3,
+
+            segmentMax: 1000,
+
+            segmentMin: 200
+        };
+
+        $(".search-radius").on('updateValues', function (customEvent) {
+            postData.searchRadius = +this.valueMax;
+
+            var found = _.find(areaContainer, function (area) {
+                return area.areaType === 'searchArea';
+            });
+
+            if (!!found) {
+                found.circle.setRadius(postData.searchRadius);
+            }
+        });
+
+        $(".food-rate").on('updateValues', function (customEvent) {
+            postData.foodRate = +this.valueMax;
+        });
+
+        $(".night-life-rate").on('updateValues', function (customEvent) {
+            postData.nightLifeRate = +this.valueMax;
+        });
+
+        $(".culture-rate").on('updateValues', function (customEvent) {
+            postData.cultureRate = +this.valueMax;
+        });
+
+        $(".search-radius")[0].setValues(null, postData.searchRadius);
+
+        $(".culture-rate")[0].setValues(null, postData.cultureRate);
+
+        $(".food-rate")[0].setValues(null, postData.foodRate);
+
+        $(".night-life-rate")[0].setValues(null, postData.nightLifeRate);
+
+        $('.segment-min').val(postData.segmentMin);
+
+        $('.segment-max').val(postData.segmentMax);
+
+        $('.segment-amount').val(postData.segmentAmount);
+    };
+
     var loadData = function (map) {
         collectRequestData();
 
@@ -46,8 +81,8 @@ var loadData = (function ($) {
     };
 
     var createUrl = function (base) {
-            return base + '/' + $.param(postData);
-        };
+        return base + '/' + $.param(postData);
+    };
 
     var collectRequestData = function () {
         postData.segmentMin = $('.segment-min').val();
@@ -191,7 +226,7 @@ var loadData = (function ($) {
         }
     };
 
-    return loadData;
+    return {load:loadData, init: initAndBound};
 })(jQuery);
 
 var initMap = function () {
@@ -201,7 +236,9 @@ var initMap = function () {
         center: {lat: 59.957570, lng: 30.307946}
     });
 
-    loadData(map);
+    mapController.init();
+
+    mapController.load(map);
 };
 
 var fakeGet = function (url, response) {
