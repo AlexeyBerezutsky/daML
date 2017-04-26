@@ -174,14 +174,14 @@ var mapController = (function ($) {
 
     var drawMarkers = function (markers, map) {
         _.forEach(markers, function (marker) {
-            var marker = new google.maps.Marker({
+            var pin = new google.maps.Marker({
                 position: marker.latLng,
                 map: map,
                 icon: getIcon(marker.markerType),
                 title: marker.name || ''
             });
 
-            marker.pin = marker;
+            marker.pin = pin;
         });
     };
 
